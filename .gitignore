@@ -102,9 +102,3 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-
-environment.yaml
-RNA-Seq-counts.txt
-Snakefile_tutorial
-v3.11.0.tar.bz2
-WCFS1_anno.txt
