@@ -1,4 +1,4 @@
-from Bio import Entrez, Medline
+from Bio import Entrez
 
 
 def main():
