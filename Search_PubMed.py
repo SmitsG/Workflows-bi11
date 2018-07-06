@@ -1,5 +1,11 @@
 from Bio import Entrez, Medline
 
+
+def main():
+    id_list = search_entrez(email="silleke_frits@hotmail.com", db="pubmed", retmax=10, term="RAS MAPK pathway", rettype="medline")
+    records = parseMedlineRecords(id_list)
+
+
 def search_entrez(email, db, retmax, term, rettype):
     Entrez.email = email
     handle = Entrez.esearch(db=db, retmax=retmax, term=term, rettype=rettype)
@@ -8,9 +14,14 @@ def search_entrez(email, db, retmax, term, rettype):
     handle.close()
     return IDs
 
-def parseMedlineRecords(idlist):
-    handle = Entrez.efetch(db="pubmed", id=idlist, rettype="medline", retmode="text")
+
+def parseMedlineRecords(id_list):
+    handle = Entrez.efetch(db="pubmed", id=id_list, rettype="medline", retmode="text")
     records = Medline.parse(handle)
     records = list(records)
-    return (records)
+    for item in records:
+        print(item, "\n")
+    print(records)
+    return records
 
+main()
