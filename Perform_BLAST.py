@@ -1,6 +1,11 @@
 from Bio.Blast import NCBIWWW, NCBIXML
 
 
+def main():
+    blast_results = blast_controller()
+    # perform_blast(program, database, sequence)
+
+
 def blast_controller(ids_protein):
     blast_results = []
     for item in ids_protein:
