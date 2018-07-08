@@ -15,6 +15,12 @@ rule all:
         "done_files/ensemble.done",
         "done_files/kegg.done"
 
+rule connect_to_entrez:
+    output:
+        "output.fasta"
+    script:
+        "Connect_to_entrez.py"
+
 rule chembl:
     output: touch("done_files/chembl.done")
     script:

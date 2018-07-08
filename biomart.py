@@ -5,8 +5,6 @@ try:
 except ImportError:
     from io import StringIO
 
-# reload(biomart)
-
 s = biomart.BioMart()
 
 # First, we need to know the datasets of ensembl database
