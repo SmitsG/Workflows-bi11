@@ -1,8 +1,27 @@
-from snakemake.utils import min_version
-min_version("3.2")
+import os
+import glob
+import argparse
+import pickle
+import Bio
+from bioservices import *
+
+rule all:
+    input:
+        "chembl.done",
+        "uniprot.done",
+        "ensemble.done"
+
+rule chembl:
+    output: touch("chembl.done")
+    script:
+        "./chembl.py"
 
 rule uniprot:
-    input:
-    output:
+    output: touch("uniprot.done")
     shell:
-        "python.py"
+        "./uniprot.py"
+
+rule ensemble:
+    output: touch("ensemble.done")
+    script:
+        "./ensemble.py"
