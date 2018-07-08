@@ -1,18 +1,19 @@
+#!/usr/bin/env python
 import argparse
 from bioservices import *
 
 
 def main():
     args = parse_args()
-    uniprot(args.id)
+    uniprot(args.id, args.query)
 
 
-def uniprot(id):
+def uniprot(id, query):
     u = UniProt()
     print(u.get_fasta(id))
-    # print(u.search(query, limit=5))
-    # df = u.get_df(id)
-    # print(df)
+    print(u.search(query, limit=5))
+    df = u.get_df(id)
+    print(df)
 
 
 INFO = 'Uniprot'
