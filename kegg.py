@@ -1,3 +1,7 @@
+from Bio.KEGG import Enzyme
+from Bio.KEGG import REST
+from bioservices.kegg import KEGG
+
 def main():
     function1()
     function2()
