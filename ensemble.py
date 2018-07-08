@@ -24,4 +24,3 @@ print(res[0:100])
 wrong = e.get_map_cds_to_region('ENST0000288602', '1..1000')
 good = e.get_map_cds_to_region('ENST00000288602', '1..1000')
 print(wrong, good['mappings'][0])
-
