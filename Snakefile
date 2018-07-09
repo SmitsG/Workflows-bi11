@@ -1,10 +1,14 @@
+from Bio import Entrez
+
 
 rule all:
     input:
-        "done_get_sequences.done",
+        "done_files/get_sequences.done"
 
 rule get_sequences:
     output:
-        "protein_sequences.fasta"
+        touch("done_files/get_sequences.done")
     script:
-        "Get_protein_sequence_fasta.py"
+        "./get_sequences.py"
+
+
