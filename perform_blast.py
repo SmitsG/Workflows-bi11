@@ -1,13 +1,18 @@
 from Bio.Blast import NCBIWWW, NCBIXML
 import argparse
-
+import os
 
 def main():
     args = parse_args()
+    remove_old_result_file(args.output)
     blast_controller(args.output,
         ids_protein=["MPRHYHYQPSRELHVVVLGAAQFVHNEWIESYDPTIEDSYRTQLQVDGRQVILEILDTAGTEQFVAMRDLYMKTGQGFL",
                      "MANDEYDFLFKVVLIGDSGVGKSNLLSRFTRNEFNLDSKSTIGVEFATRSIQVDSKTIKAQIWDTAGQERYRAITSAYY"], hitlist_size = 1)
 
+
+def remove_old_result_file(output_path):
+    if os.path.exists(output_path):
+        os.remove(output_path)
 
 # It is not possible to BLAST multiple sequences at once, so a for loop is needed
 def blast_controller(output, ids_protein, hitlist_size):
