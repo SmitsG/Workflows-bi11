@@ -19,9 +19,6 @@ def parseMedlineRecords(id_list):
     handle = Entrez.efetch(db="pubmed", id=id_list, rettype="medline", retmode="text")
     records = Medline.parse(handle)
     records = list(records)
-    for item in records:
-        print(item, "\n")
-    print(records)
     return records
 
 main()
