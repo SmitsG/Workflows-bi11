@@ -1,6 +1,3 @@
-from Bio import Entrez
-
-
 rule all:
     input:
         "done_files/get_sequences.done"
@@ -11,4 +8,11 @@ rule get_sequences:
     script:
         "./get_sequences.py"
 
+rule Perform_BLAST:
+    input:
+        "output.fasta"
+    output:
+        touch("output_blast.txt")
+    script:
+        "./Perform_BLAST.py"
 
