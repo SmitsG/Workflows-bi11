@@ -14,11 +14,13 @@ def blast_controller(ids_protein):
         blast_results.append(blast_result)
     return blast_results
 
+
 # Called from blast_controller
 def perform_blast(program, database, sequence):
     handle = NCBIWWW.qblast(program=program, database=database, sequence=sequence)
     handle.close()
     return handle
+
 
 # Called from blast_controller
 def parse_blast_record(handle):
