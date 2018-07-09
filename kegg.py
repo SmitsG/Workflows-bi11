@@ -4,24 +4,29 @@ from bioservices.kegg import KEGG
 
 
 def main():
-    function1()
-    function2()
-    function3()
+    get_kegg_annotation()
+    amount_pathway_genes()
+    show_pathway()
 
 
-def function1():
-    # request = REST.kegg_get("ec:5.4.2.2")
-    # open("ec_5.4.2.2.txt", "w").write(request.read())
-    # records = Enzyme.parse(open("ec_5.4.2.2.txt"))
-    # record = list(records)[0]
-    # print(record.classname)
-    records = Enzyme.parse(open("ec_5.4.2.2"))
+def get_kegg_annotation():
+    """
+    Get annotation ec:5.4.2.2 from kegg database and write to txt file.
+    Print annotation
+    :return:
+    """
+    request = REST.kegg_get("ec:5.4.2.2")
+    open("ec_5.4.2.2.txt", "w").write(request.read())
+    records = Enzyme.parse(open("ec_5.4.2.2.txt"))
     record = list(records)[0]
     print(record.classname)
-    print(record.entry)
 
 
-def function2():
+def amount_pathway_genes():
+    """
+    Function to measure the amount repair genes in a human pathway.
+    :return:
+    """
     human_pathways = REST.kegg_list("pathway", "hsa").read()
 
     # Filter all human pathways for repair pathways
@@ -56,9 +61,12 @@ def function2():
     print(", ".join(repair_genes))
 
 
-def function3():
+def show_pathway():
+    """
+    function that shows p53 pathway in KEGG
+    """
     k = KEGG(verbose=True)
-    k.lookfor_pathway("B cell")
-    print(k.show_pathway("path:hsa04662"))
+    k.lookfor_pathway("p53 signaling pathway - Homo sapiens (human)")
+    print(k.show_pathway("path:hsa04115"))
 
 main()
