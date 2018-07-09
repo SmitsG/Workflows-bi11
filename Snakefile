@@ -41,9 +41,13 @@ rule ensembl:
     script:
         "./ensembl.py"
 
+<<<<<<< Updated upstream
 # gets some information out of kegg
 rule kegg:
     output: touch("done_files/kegg.done")
     priority: 250
     run:
         "./kegg.py"
+=======
+
+>>>>>>> Stashed changes
