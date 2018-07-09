@@ -1,4 +1,5 @@
 from Bio import Entrez, Medline
+import os
 
 
 def main():
@@ -27,8 +28,21 @@ def parseMedlineRecords(id_list):
 
 def get_abstracts(records):
     abstracts_list = []
+    if os.path.exists("PubMed_output.txt"):
+        os.remove("PubMed_output.txt")
+    count = 0
     for record in records:
-        abstracts_list.append(record.get("AB", "?"))
+        count += 1
+        with open("PubMed_output.txt", "a") as pm_out:
+            pm_out.write("Abstract number ")
+            pm_out.write(str(count))
+            pm_out.write("\n")
+            abstract = record.get("AB", "?")
+            pm_out.write(abstract)
+            pm_out.write("\n")
+            pm_out.write("\n")
+    pm_out.close()
+    abstracts_list.append(record.get("AB", "?"))
     return abstracts_list
 
 
