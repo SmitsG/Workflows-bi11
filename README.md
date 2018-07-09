@@ -1,3 +1,2 @@
-# Skeleton for the Snakemake tutorial
-
-This repository hosts the skeleton code needed for the [Snakemake tutorial](http://snakemake.readthedocs.io/en/latest/tutorial/welcome.html).
+Workflow runs with snakemake
+Please make sure you installed the correct libraries.
