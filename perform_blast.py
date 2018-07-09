@@ -2,7 +2,9 @@ from Bio.Blast import NCBIWWW, NCBIXML
 import argparse
 import os
 
+
 def main():
+    # Controls program
     args = parse_args()
     remove_old_result_file(args.output)
     blast_controller(args.output,
@@ -11,22 +13,31 @@ def main():
 
 def remove_old_result_file(output_path):
     """
-    function that removes the old result file.
+    #output_path=path of the file that needs to be removed
     """
     if os.path.exists(output_path):
         os.remove(output_path)
 
-# It is not possible to BLAST multiple sequences at once, so a for loop is needed
+
 def blast_controller(output, protein_sequence, hitlist_size):
+    """
+    # It is not possible to BLAST multiple sequences at once, so a for loop is needed
+    # Calls perform_blast
+    # Returns empty string
+    """
     for item in protein_sequence:
         perform_blast(output, program="blastp", database="nr", sequence=item, hitlist_size=hitlist_size)
     return ""
 
 
-# Called from blast_controller
 def perform_blast(output, program, database, sequence, hitlist_size):
     """
-    function that performs the blast with the sequence.
+    Called from blast_controller. Performs BLAST and writes to output file
+    output= path for the output file
+    program=the BLAST program to be used
+    database=the database to BLAST against
+    sequence=the sequence to be blasted
+    hitlist_size=maximum number of hits
     """
     handle = NCBIWWW.qblast(program=program, database=database, sequence=sequence, hitlist_size=hitlist_size)
     with open(output, "a") as out_handle:
