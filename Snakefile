@@ -2,7 +2,14 @@ rule all:
     input:
         "done_files/get_sequence.done",
         "done_files/perform_blast.done",
-        "done_files/search_pubmed.done"
+        "done_files/search_pubmed.done",
+        "done_files/calculate_sequence_length_plot.done"
+
+rule calculate_sequence_length_plot:
+    output:
+        touch("done_files/calculate_sequence_length_plot.done")
+    script:
+        "calculate_sequence_length_plot.R"
 
 rule get_sequences:
     output:
