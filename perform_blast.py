@@ -9,21 +9,21 @@ def main():
     print(args.output)
     blast_handle_list = blast_controller(args.output,
         ids_protein=["MPRHYHYQPSRELHVVVLGAAQFVHNEWIESYDPTIEDSYRTQLQVDGRQVILEILDTAGTEQFVAMRDLYMKTGQGFL",
-                     "MANDEYDFLFKVVLIGDSGVGKSNLLSRFTRNEFNLDSKSTIGVEFATRSIQVDSKTIKAQIWDTAGQERYRAITSAYY"])
+                     "MANDEYDFLFKVVLIGDSGVGKSNLLSRFTRNEFNLDSKSTIGVEFATRSIQVDSKTIKAQIWDTAGQERYRAITSAYY"], hitlist_size = 1)
 
 
 # It is not possible to BLAST multiple sequences at once, so a for loop is needed
-def blast_controller(output, ids_protein):
+def blast_controller(output, ids_protein, hitlist_size):
     blast_handle_list = []
     for item in ids_protein:
-        handle_blast = perform_blast(output, program="blastp", database="nr", sequence=item)
+        handle_blast = perform_blast(output, program="blastp", database="nr", sequence=item, hitlist_size=hitlist_size)
         blast_handle_list.append(handle_blast)
     return blast_handle_list
 
 
 # Called from blast_controller
-def perform_blast(output, program, database, sequence):
-    handle = NCBIWWW.qblast(program=program, database=database, sequence=sequence)
+def perform_blast(output, program, database, sequence, hitlist_size):
+    handle = NCBIWWW.qblast(program=program, database=database, sequence=sequence, hitlist_size=hitlist_size)
     with open(output, "a") as out_handle:
         out_handle.write(handle.read())
         out_handle.close()
