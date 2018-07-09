@@ -3,22 +3,17 @@ import argparse
 
 
 def main():
-    print("hello")
     args = parse_args()
-    print(args.input)
-    print(args.output)
-    blast_handle_list = blast_controller(args.output,
+    blast_controller(args.output,
         ids_protein=["MPRHYHYQPSRELHVVVLGAAQFVHNEWIESYDPTIEDSYRTQLQVDGRQVILEILDTAGTEQFVAMRDLYMKTGQGFL",
                      "MANDEYDFLFKVVLIGDSGVGKSNLLSRFTRNEFNLDSKSTIGVEFATRSIQVDSKTIKAQIWDTAGQERYRAITSAYY"], hitlist_size = 1)
 
 
 # It is not possible to BLAST multiple sequences at once, so a for loop is needed
 def blast_controller(output, ids_protein, hitlist_size):
-    blast_handle_list = []
     for item in ids_protein:
-        handle_blast = perform_blast(output, program="blastp", database="nr", sequence=item, hitlist_size=hitlist_size)
-        blast_handle_list.append(handle_blast)
-    return blast_handle_list
+        perform_blast(output, program="blastp", database="nr", sequence=item, hitlist_size=hitlist_size)
+    return ""
 
 
 # Called from blast_controller
@@ -28,7 +23,7 @@ def perform_blast(output, program, database, sequence, hitlist_size):
         out_handle.write(handle.read())
         out_handle.close()
     handle.close()
-    return handle
+
 
 
 INFO = 'Arguments workflow project'
