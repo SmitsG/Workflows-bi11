@@ -5,7 +5,6 @@ def main():
     blast_handle_list = blast_controller(
         ids_protein=["MPRHYHYQPSRELHVVVLGAAQFVHNEWIESYDPTIEDSYRTQLQVDGRQVILEILDTAGTEQFVAMRDLYMKTGQGFL",
                      "MANDEYDFLFKVVLIGDSGVGKSNLLSRFTRNEFNLDSKSTIGVEFATRSIQVDSKTIKAQIWDTAGQERYRAITSAYY"])
-    #write_blast_output_to_xml(blast_handle_list)
 
 
 # It is not possible to BLAST multiple sequences at once, so a for loop is needed
