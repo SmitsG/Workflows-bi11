@@ -4,39 +4,46 @@ import argparse
 import pickle
 import Bio
 from bioservices import *
-from kegg import function1 as function1
-from kegg import function2 as function2
-from kegg import function3 as function3
+from kegg import get_kegg_annotation
+from kegg import amount_pathway_genes
+from kegg import show_pathway
 
+
+# prove of concept.
+# Sometimes it is necessary to enforce some rule execution order without real file dependencies.
+# With the touch flag, Snakemake touches (i.e. creates or updates) the file mytask.done after mycommand has finished
+# successfully.
 rule all:
     input:
         "done_files/chembl.done",
         "done_files/uniprot.done",
-        "done_files/ensemble.done",
+        "done_files/ensembl.done",
         "done_files/kegg.done"
 
-rule connect_to_entrez:
-    output:
-        "output.fasta"
-    script:
-        "Connect_to_entrez.py"
-
+# get some information out of chembl
 rule chembl:
     output: touch("done_files/chembl.done")
+    priority: 1000
     script:
         "./chembl.py"
 
+# get some information out of uniprot
 rule uniprot:
     output: touch("done_files/uniprot.done")
+    priority: 750
     shell:
         "./uniprot.py"
 
-rule ensemble:
-    output: touch("done_files/ensemble.done")
+# gets some information out of ensembl
+rule ensembl:
+    output: touch("done_files/ensembl.done")
+    priority: 500
     script:
-        "./ensemble.py"
+        "./ensembl.py"
 
+# gets some information out of kegg
 rule kegg:
     output: touch("done_files/kegg.done")
+    priority: 250
     run:
         "./kegg.py"
