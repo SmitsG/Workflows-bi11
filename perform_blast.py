@@ -39,7 +39,7 @@ def parse_args():
     Argument parser
     :return: args: All arguments are parsed to the args.
     """
-    INFO = 'Creates a report with gene information'
+    INFO = 'perform_blast'
     parser = argparse.ArgumentParser(description=INFO,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 
@@ -47,13 +47,13 @@ def parse_args():
                         type=str,
                         required=False,
                         default="output.fasta",
-                        help="Absolute input file path")
+                        help="(Absolute) input file path")
 
     parser.add_argument("--output",
                         type=str,
                         required=False,
                         default="blast_output.xml",
-                        help="Absolute input file path")
+                        help="(Absolute) output file path")
 
     # parse all arguments
     args = parser.parse_args()
