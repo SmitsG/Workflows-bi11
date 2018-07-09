@@ -10,6 +10,9 @@ def main():
 
 
 def remove_old_result_file(output_path):
+    """
+    function that removes the old result file.
+    """
     if os.path.exists(output_path):
         os.remove(output_path)
 
@@ -22,12 +25,14 @@ def blast_controller(output, protein_sequence, hitlist_size):
 
 # Called from blast_controller
 def perform_blast(output, program, database, sequence, hitlist_size):
+    """
+    function that performs the blast with the sequence.
+    """
     handle = NCBIWWW.qblast(program=program, database=database, sequence=sequence, hitlist_size=hitlist_size)
     with open(output, "a") as out_handle:
         out_handle.write(handle.read())
         out_handle.close()
     handle.close()
-
 
 
 INFO = 'Arguments workflow project'

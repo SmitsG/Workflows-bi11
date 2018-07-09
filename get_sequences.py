@@ -3,6 +3,7 @@ import argparse
 
 
 def main():
+    # Controls the flow of the script
     args = parse_args()
     email = "silleke_frits@hotmail.com"
     ids_protein = search_entrez(email=email, db="protein", retmax=5, term="RAS", rettype="fasta")
@@ -11,6 +12,15 @@ def main():
 
 
 def search_entrez(email, db, retmax, term, rettype):
+    """
+    Searches database
+    email=the emailadres of the user
+    db=the database to be searched
+    retmax=maximum number of hits
+    term=query for the database
+    rettype=type of retrieval
+    returns the IDs of the records that are found
+    """
     Entrez.email = email
     handle = Entrez.esearch(db=db, retmax=retmax, term=term, rettype=rettype)
     records = Entrez.read(handle)
@@ -20,6 +30,15 @@ def search_entrez(email, db, retmax, term, rettype):
 
 
 def fetch_results(email, db, ids, rettype, retmode):
+    """
+    Download the results
+    email=the emailadres of the user
+    db=the database to be searched
+    ids=the record ids
+    rettype=type of retrieval
+    retmode=type of the outputfile
+    returns a list with records
+    """
     Entrez.email = email
     handle = Entrez.efetch(db=db, id=ids, rettype=rettype, retmode=retmode)
     records = Entrez.read(handle)
@@ -30,8 +49,9 @@ def fetch_results(email, db, ids, rettype, retmode):
 
 def get_sequence_and_write_to_fasta(output, records_list):
     """
-    :param records_list:
-    :return: none
+    Writes sequences to fasta ouputfile
+    output=path for output
+    records_list=list with records -> sequences
     """
     genes_fasta = open(output, "w")
     count = 0

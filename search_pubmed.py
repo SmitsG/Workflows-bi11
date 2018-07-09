@@ -13,6 +13,15 @@ def main():
 
 
 def search_entrez(email, db, retmax, term, rettype):
+    """
+       Searches database
+       email=the emailadres of the user
+       db=the database to be searched
+       retmax=maximum number of hits
+       term=query for the database
+       rettype=type of retrieval
+       returns the IDs of the records that are found
+       """
     Entrez.email = email
     handle = Entrez.esearch(db=db, retmax=retmax, term=term, rettype=rettype)
     records = Entrez.read(handle)
